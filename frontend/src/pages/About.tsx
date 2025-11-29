@@ -4,6 +4,14 @@ const About = () => {
       <div className="max-w-3xl mx-auto">
         <h1 className="heading-2 text-center mb-12">About Alphabetroots</h1>
 
+        <div className="mb-8">
+          <img 
+            src="/images/about/Family reading.jpg" 
+            alt="Family reading together" 
+            className="w-full h-auto rounded-lg shadow-md"
+          />
+        </div>
+
         <div className="card space-y-6">
           <section>
             <h2 className="heading-3 mb-4">Our Mission</h2>
