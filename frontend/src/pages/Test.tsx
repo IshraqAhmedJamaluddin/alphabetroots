@@ -1,8 +1,6 @@
 import { useState } from "react";
 import React from "react";
 import HTMLFlipBook from "react-pageflip";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 interface StoryPage {
   imageUrl: string;
@@ -41,147 +39,7 @@ const Test = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [storyPages, setStoryPages] = useState<StoryPage[]>([]);
   const [error, setError] = useState<string | null>(null);
-
-  // Image page component - displays on left side
-  const ImagePage = React.forwardRef<HTMLDivElement, { page: StoryPage }>(
-    ({ page }, ref) => {
-      return (
-        <div
-          ref={ref}
-          className="page"
-          style={{
-            backgroundColor: "#fff",
-            padding: 0,
-            margin: 0,
-            width: "100%",
-            height: "100%",
-            position: "relative",
-          }}
-        >
-          <div
-            className="page-content"
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px",
-              boxSizing: "border-box",
-            }}
-          >
-            <img
-              src={page.imageUrl}
-              alt={`Page ${page.pageNumber}`}
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                width: "auto",
-                height: "auto",
-                objectFit: "contain",
-              }}
-              onError={(e) => {
-                // Fallback if image doesn't exist
-                (e.target as HTMLImageElement).src =
-                  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect width="400" height="400" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999"%3EImage Placeholder%3C/text%3E%3C/svg%3E';
-              }}
-            />
-          </div>
-        </div>
-      );
-    }
-  );
-
-  ImagePage.displayName = "ImagePage";
-
-  // Text page component - displays on right side
-  const TextPage = React.forwardRef<HTMLDivElement, { page: StoryPage }>(
-    ({ page }, ref) => {
-      return (
-        <div
-          ref={ref}
-          className="page"
-          style={{
-            backgroundColor: "#fff",
-            padding: 0,
-            margin: 0,
-            width: "100%",
-            height: "100%",
-            position: "relative",
-          }}
-        >
-          <div
-            className="page-content"
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "30px",
-              boxSizing: "border-box",
-              position: "relative",
-            }}
-          >
-            <p
-              className="text-lg text-dark-600"
-              style={{
-                textAlign: "center",
-                lineHeight: "1.8",
-                margin: 0,
-              }}
-            >
-              {page.text}
-            </p>
-            {/* Page number at bottom right */}
-            <div
-              className="text-sm text-dark-400"
-              style={{
-                position: "absolute",
-                right: "15px",
-                bottom: "15px",
-                fontSize: "18px",
-                fontWeight: "500",
-              }}
-            >
-              {page.pageNumber}
-            </div>
-          </div>
-        </div>
-      );
-    }
-  );
-
-  TextPage.displayName = "TextPage";
-
-  // Cover page component - must have data-density="hard" and className="page page-cover"
-  const PageCover = React.forwardRef<HTMLDivElement>((_, ref) => {
-    return (
-      <div
-        ref={ref}
-        className="page page-cover"
-        data-density="hard"
-        style={{
-          backgroundColor: "#fff",
-          padding: 0,
-          margin: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        <div
-          className="page-content"
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-        />
-      </div>
-    );
-  });
-
-  PageCover.displayName = "PageCover";
+  const [currentPage, setCurrentPage] = useState(0);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -385,74 +243,68 @@ const Test = () => {
     }
   };
 
-  const handleDownloadPDF = async () => {
-    try {
-      const pdf = new jsPDF("portrait", "px", [450, 800]);
-      const pages = displayPages.length;
-
-      for (let i = 0; i < pages; i++) {
-        if (i > 0) {
-          pdf.addPage();
-        }
-
-        // Get the page element
-        const pageElement = document.querySelector(
-          `[data-page="${i}"]`
-        ) as HTMLElement;
-        if (pageElement) {
-          const canvas = await html2canvas(pageElement, {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: "#ffffff",
-          });
-          const imgData = canvas.toDataURL("image/png");
-          pdf.addImage(imgData, "PNG", 0, 0, 450, 800);
-        }
-      }
-
-      pdf.save(`${boyName || "story"}-storybook.pdf`);
-    } catch (err) {
-      console.error("Error generating PDF:", err);
-      setError("Failed to generate PDF. Please try again.");
-    }
-  };
-
   // Only use generated pages (no fallback to sample pages)
   const displayPages = storyPages;
 
-  // Build pages array for FlipBook component
-  // Each page has left and right content
-  const flipBookPages = [];
+  if (storyPages.length > 0) {
+    return (
+      <div className="flipbook-page-container">
+        <HTMLFlipBook
+          width={550}
+          height={733}
+          maxShadowOpacity={0.5}
+          drawShadow={true}
+          showCover={true}
+          size="fixed"
+          onFlip={(e) => setCurrentPage(e.data)}
+        >
+          <div className="page" style={{ background: "transparent" }}>
+            <div className="page-content cover">
+              <h2>{boyName || "Story"}</h2>
+            </div>
+          </div>
 
-  // First page: Cover on left, first image on right
-  if (displayPages.length > 0) {
-    flipBookPages.push({
-      left: <PageCover />,
-      right: <ImagePage page={displayPages[0]} />,
-    });
-  }
+          {displayPages.map((story) => (
+            <div className="page" key={story.pageNumber}>
+              <div className="page-content">
+                <h2 className="page-header">Page {story.pageNumber}</h2>
+                <div className="page-image">
+                  <img
+                    src={story.imageUrl}
+                    alt={`Page ${story.pageNumber}`}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                    }}
+                    onError={(e) => {
+                      // Fallback if image doesn't exist
+                      (e.target as HTMLImageElement).src =
+                        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect width="400" height="400" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999"%3EImage Placeholder%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                </div>
+                <div className="page-text">{story.text}</div>
+                <div className="page-footer">{story.pageNumber + 1}</div>
+              </div>
+            </div>
+          ))}
 
-  // Middle pages: Text on left, next image on right
-  for (let i = 0; i < displayPages.length - 1; i++) {
-    flipBookPages.push({
-      left: <TextPage page={displayPages[i]} />,
-      right: <ImagePage page={displayPages[i + 1]} />,
-    });
-  }
-
-  // Last page: Last text on left, cover on right
-  if (displayPages.length > 0) {
-    flipBookPages.push({
-      left: <TextPage page={displayPages[displayPages.length - 1]} />,
-      right: <PageCover />,
-    });
+          <div className="page" style={{ background: "transparent" }}>
+            <div className="page-content cover">
+              <h2>THE END</h2>
+            </div>
+          </div>
+        </HTMLFlipBook>
+      </div>
+    );
   }
 
   return (
     <div className="section-container py-12">
       <h1 className="heading-2 text-center mb-8">Story Generator Test</h1>
 
-      {!storyPages.length && !isLoading && (
+      {!isLoading && (
         <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
           <div className="card space-y-6">
             <div>
@@ -525,28 +377,6 @@ const Test = () => {
           <p className="text-dark-400 text-sm mt-2">
             This may take a few moments
           </p>
-        </div>
-      )}
-
-      {storyPages.length > 0 && (
-        <div className="flex flex-col items-center">
-          <div className="mb-6">
-            <button onClick={handleDownloadPDF} className="btn-primary">
-              Download as PDF
-            </button>
-          </div>
-
-          <div
-            className="book-container"
-            style={{
-              width: "450px",
-              height: "800px",
-              margin: "0 auto",
-              position: "relative",
-            }}
-          >
-            <FlipBook width={450} height={800} pages={flipBookPages} />
-          </div>
         </div>
       )}
     </div>
