@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 // Sample stories with images from the original website
 const sampleStories = [
   {
@@ -51,9 +53,12 @@ const AllStories = () => {
               {story.description && (
                 <p className="text-dark-400 mb-4 line-clamp-3">{story.description}</p>
               )}
-              <div className="text-primary-600 font-medium hover:text-primary-700 cursor-pointer">
+              <Link
+                to="/test"
+                className="text-primary-600 font-medium hover:text-primary-700 cursor-pointer"
+              >
                 View Story →
-              </div>
+              </Link>
             </div>
           ))}
         </div>

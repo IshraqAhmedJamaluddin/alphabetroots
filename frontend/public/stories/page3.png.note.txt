@@ -1,0 +1,5 @@
+Placeholder SVG created. Original should be: page3.png
+
+Description: A cartoon illustration of the boy discovering a hidden treasure chest in the forest.
+
+Generate actual image using Gemini API.

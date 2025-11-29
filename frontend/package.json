@@ -10,9 +10,14 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "axios": "^1.6.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.4",
+    "multer": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-pageflip": "^2.0.3",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.21.1"
   },

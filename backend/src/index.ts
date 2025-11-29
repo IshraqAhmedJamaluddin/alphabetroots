@@ -10,6 +10,7 @@ import storiesRouter from './routes/stories';
 import galleryRouter from './routes/gallery';
 import contactRouter from './routes/contact';
 import ordersRouter from './routes/orders';
+import testRouter from './routes/test';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use('/api/stories', storiesRouter);
 app.use('/api/gallery', galleryRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/orders', ordersRouter);
+app.use('/api/test', testRouter);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="800" fill="#4A90E2" opacity="0.3"/>
+  <rect x="50" y="50" width="500" height="700" fill="white" stroke="#4A90E2" stroke-width="4" rx="10"/>
+  <text x="300" y="360" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333" text-anchor="middle">
+    Page 1
+  </text>
+  <text x="300" y="400" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle" width="400">
+    A cartoon illustration of a young boy standing in a magical ...
+  </text>
+  <text x="300" y="430" font-family="Arial, sans-serif" font-size="12" fill="#999" text-anchor="middle">
+    Placeholder - Generate with Gemini API
+  </text>
+</svg>

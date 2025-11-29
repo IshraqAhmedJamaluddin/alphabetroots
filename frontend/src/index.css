@@ -5,7 +5,7 @@
 @layer base {
   body {
     @apply bg-neutral-50 text-dark-500 font-sans antialiased;
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   }
 }
 
@@ -57,5 +57,103 @@
   .text-body {
     @apply text-base md:text-lg text-dark-400 leading-relaxed;
   }
-}
 
+  /* Flipbook page container - matches reference structure exactly */
+  .flipbook-page-container {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Ensure main element centers the flipbook container */
+  main:has(.flipbook-page-container) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Page styles - minimal interference with library */
+  .page {
+    background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* Page cover styling */
+  .cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
+  }
+
+  .cover h2 {
+    font-size: 2rem;
+  }
+
+  /* Page structure classes */
+  .page-header {
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .page-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    min-height: 0;
+  }
+
+  .page-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .page-text {
+    padding: 10px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Override any conflicting styles - let library control its internal structure */
+  .stf__parent {
+    overflow: visible !important;
+  }
+}

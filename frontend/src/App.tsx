@@ -10,6 +10,8 @@ import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import ThankYou from './pages/ThankYou';
 import Preview from './pages/Preview';
+import Test from './pages/Test';
+import FlippingTest from './pages/FlippingTest';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import ShippingPolicy from './pages/ShippingPolicy';
@@ -30,6 +32,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/preview" element={<Preview />} />
+        <Route path="/test" element={<Test />} />
+        <Route path="/flipping_test" element={<FlippingTest />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/shipping-policy" element={<ShippingPolicy />} />

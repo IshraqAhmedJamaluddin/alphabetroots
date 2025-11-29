@@ -1,0 +1,5 @@
+Placeholder SVG created. Original should be: page4.png
+
+Description: A cartoon illustration of the boy sharing the treasure with his friends.
+
+Generate actual image using Gemini API.
