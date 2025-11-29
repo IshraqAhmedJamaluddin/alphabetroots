@@ -1,5 +1,6 @@
 import { useState } from "react";
 import HTMLFlipBook from "react-pageflip";
+import { getAssetPath } from "../utils/paths";
 
 const FlippingTest = () => {
   const [, setCurrentPage] = useState(0);
@@ -7,17 +8,17 @@ const FlippingTest = () => {
   const storyPages = [
     {
       pageNumber: 1,
-      imageUrl: "/stories/page1.png",
+      imageUrl: getAssetPath("stories/page1.png"),
       text: "Once upon a time, there was a brave boy named Alex.",
     },
     {
       pageNumber: 2,
-      imageUrl: "/stories/page2.png",
+      imageUrl: getAssetPath("stories/page2.png"),
       text: "Alex loved to explore the magical forest.",
     },
     {
       pageNumber: 3,
-      imageUrl: "/stories/page3.png",
+      imageUrl: getAssetPath("stories/page3.png"),
       text: "In the forest, Alex discovered many wonderful things.",
     },
   ];

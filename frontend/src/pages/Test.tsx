@@ -1,5 +1,6 @@
 import { useState } from "react";
 import HTMLFlipBook from "react-pageflip";
+import { getAssetPath } from "../utils/paths";
 
 interface StoryPage {
   imageUrl: string;
@@ -211,7 +212,7 @@ const Test = () => {
               );
               return {
                 pageNumber: page.pageNumber,
-                imageUrl: `/stories/${page.imageName}`,
+                imageUrl: getAssetPath(`stories/${page.imageName}`),
                 text: page.text.replace(/{NAME}/g, boyName.trim()),
               };
             }
@@ -226,7 +227,7 @@ const Test = () => {
             // Fallback to placeholder
             return {
               pageNumber: page.pageNumber,
-              imageUrl: `/stories/${page.imageName}`,
+              imageUrl: getAssetPath(`stories/${page.imageName}`),
               text: page.text.replace(/{NAME}/g, boyName.trim()),
             };
           }

@@ -1,3 +1,5 @@
+import { getAssetPath } from '../utils/paths';
+
 const About = () => {
   return (
     <div className="section-container py-12">
@@ -6,7 +8,7 @@ const About = () => {
 
         <div className="mb-8">
           <img 
-            src="/images/about/Family reading.jpg" 
+            src={getAssetPath("images/about/Family reading.jpg")} 
             alt="Family reading together" 
             className="w-full h-auto rounded-lg shadow-md"
           />

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getAssetPath } from '../utils/paths';
 
 // Sample stories with images from the original website
 const sampleStories = [
@@ -6,25 +7,25 @@ const sampleStories = [
     id: '1',
     title: 'Adventure Story',
     description: 'An exciting adventure story featuring personalized characters.',
-    cover_image_url: '/images/stories/story-adventure.jpg',
+    cover_image_url: getAssetPath('images/stories/story-adventure.jpg'),
   },
   {
     id: '2',
     title: 'Family Moments',
     description: 'Capture your family\'s special moments in a beautiful storybook.',
-    cover_image_url: '/images/stories/story-family.jpg',
+    cover_image_url: getAssetPath('images/stories/story-family.jpg'),
   },
   {
     id: '3',
     title: 'Nature Journey',
     description: 'A journey through nature with your personalized characters.',
-    cover_image_url: '/images/stories/story-nature.jpg',
+    cover_image_url: getAssetPath('images/stories/story-nature.jpg'),
   },
   {
     id: '4',
     title: 'Bedtime Stories',
     description: 'Perfect bedtime stories featuring your loved ones.',
-    cover_image_url: '/images/stories/story-bedtime.jpg',
+    cover_image_url: getAssetPath('images/stories/story-bedtime.jpg'),
   },
 ];
 

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getProducts } from "../services/api";
+import { getAssetPath } from "../utils/paths";
 
 const Home = () => {
   const { data: products, isLoading } = useQuery("products", getProducts);
@@ -9,25 +10,25 @@ const Home = () => {
     {
       title: "Secure Storage",
       description: "All images are securely stored on our servers.",
-      image: "/images/Bookshelf.jpg",
+      image: getAssetPath("images/Bookshelf.jpg"),
       link: "/about",
     },
     {
       title: "Personalized Prints",
       description: "Enjoy high-quality prints delivered to your door.",
-      image: "/images/personalized-storybook.jpg",
+      image: getAssetPath("images/personalized-storybook.jpg"),
       link: "/our-collection",
     },
     {
       title: "Instant Preview",
       description: "Preview your storybook before printing.",
-      image: "/images/hero-1.jpg",
+      image: getAssetPath("images/hero-1.jpg"),
       link: "/preview",
     },
     {
       title: "User-Friendly",
       description: "Experience a simple and intuitive design process.",
-      image: "/images/family-reading-storybook.jpg",
+      image: getAssetPath("images/family-reading-storybook.jpg"),
       link: "/contact",
     },
   ];
@@ -38,7 +39,7 @@ const Home = () => {
       <section className="relative bg-gradient-to-br from-primary-50 to-neutral-100 py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img
-            src="/images/Storytime.jpg"
+            src={getAssetPath("images/Storytime.jpg")}
             alt=""
             className="w-full h-full object-cover"
           />
