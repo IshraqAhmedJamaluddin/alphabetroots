@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 
 const FlippingTest = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [, setCurrentPage] = useState(0);
 
   const storyPages = [
     {
@@ -39,7 +39,7 @@ const FlippingTest = () => {
           </div>
         </div>
 
-        {storyPages.map((story, index) => (
+        {storyPages.map((story) => (
           <div className="page" key={story.pageNumber}>
             <div className="page-content">
               <h2 className="page-header">Page {story.pageNumber}</h2>

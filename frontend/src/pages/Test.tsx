@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 import HTMLFlipBook from "react-pageflip";
 
 interface StoryPage {
@@ -39,7 +38,7 @@ const Test = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [storyPages, setStoryPages] = useState<StoryPage[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [, setCurrentPage] = useState(0);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
